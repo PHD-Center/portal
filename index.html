@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHDc-AsPEN-IMPRESIVE Alliance for Decision-Grade RWE</title>
+<meta name="description" content="Portal of the PHDc-AsPEN-IMPRESIVE Alliance for Decision-Grade RWE.">
+<style>
+  :root {
+    --green: #2f5d40;       /* PHDc green, deepened */
+    --green-dark: #24492f;
+    --teal: #62898e;        /* PHDc secondary */
+    --green-tint: #eef4f0;
+    --ink: #2c2d33;
+    --muted: #5f6b66;
+    --line: #c9d6cd;
+    --bg: #fafbfa;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 48px 24px 40px; }
+
+  header { text-align: center; margin-bottom: 44px; }
+  header h1 {
+    font-size: clamp(22px, 3.6vw, 30px);
+    color: var(--green);
+    letter-spacing: -.01em;
+  }
+  header .sub { color: var(--muted); font-size: 15.5px; margin-top: 4px; }
+  header .rule {
+    width: 64px; height: 3px; background: var(--green);
+    margin: 16px auto 0; border-radius: 2px;
+  }
+
+  /* ---- boxes ---- */
+  .node {
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 18px;
+    text-align: center;
+  }
+  .node .t { font-weight: 700; color: var(--green); font-size: 15.5px; }
+  .node .d { font-size: 13.5px; color: var(--ink); margin-top: 2px; }
+
+  .row-top {
+    display: grid; grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 24px; max-width: 620px; margin: 0 auto;
+  }
+  .node.partner { border-style: dashed; }
+
+  .hub {
+    max-width: 420px; margin: 0 auto;
+    background: var(--green); border: none;
+    box-shadow: 0 4px 14px rgba(47,93,64,.25);
+  }
+  .hub .t { color: #fff; font-size: 16.5px; }
+  .hub .d { color: #ddeee3; }
+
+  .row-bottom { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 24px; }
+  a.node {
+    display: block; text-decoration: none;
+    transition: border-color .15s, box-shadow .15s, transform .15s;
+  }
+  a.node:hover {
+    border-color: var(--green);
+    box-shadow: 0 4px 14px rgba(47,93,64,.18);
+    transform: translateY(-2px);
+  }
+  a.node .lines { margin-top: 6px; }
+  a.node .lines div { font-size: 13.5px; color: var(--ink); margin-top: 4px; }
+  a.node .go {
+    display: inline-block; margin-top: 12px;
+    font-size: 12.5px; font-weight: 600; color: var(--green);
+  }
+  a.node:hover .go { text-decoration: underline; }
+
+  /* ---- connectors ---- */
+  .connector { display: flex; justify-content: center; }
+  .connector svg { display: block; }
+  .conn-label {
+    font-size: 12px; color: var(--muted);
+    background: var(--green-tint);
+    border-radius: 4px; padding: 1px 8px;
+  }
+
+  footer {
+    text-align: center; color: var(--muted); font-size: 12.5px;
+    margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line);
+  }
+  footer a { color: var(--teal); text-decoration: none; }
+  footer a:hover { color: var(--green); }
+
+  @media (max-width: 680px) {
+    .row-top, .row-bottom { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+    .connector { display: none; }
+    .hub { margin: 20px auto; }
+    .row-top { margin-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>PHDc-AsPEN-IMPRESIVE Alliance</h1>
+    <div class="sub">for Decision-Grade RWE</div>
+    <div class="rule"></div>
+  </header>
+
+  <div class="row-top">
+    <div class="node">
+      <div class="t">NCKU</div>
+      <div class="d">Legal and Contracting Entity</div>
+    </div>
+    <div class="node partner">
+      <div class="t">Amgen</div>
+      <div class="d">Founding Strategic Research Partner</div>
+    </div>
+  </div>
+
+  <div class="connector" aria-hidden="true">
+    <svg width="640" height="64" viewBox="0 0 640 64" fill="none">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="#8aa895"/>
+        </marker>
+      </defs>
+      <path d="M164 4 C164 36 320 28 320 56" stroke="#8aa895" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <path d="M476 4 C476 36 320 28 320 56" stroke="#8aa895" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+      <foreignObject x="440" y="14" width="150" height="24">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="text-align:center;">
+          <span class="conn-label">Strategic Partnership</span>
+        </div>
+      </foreignObject>
+    </svg>
+  </div>
+
+  <div class="node hub">
+    <div class="t">PHDc-AsPEN-IMPRESIVE Alliance</div>
+    <div class="d">for Decision-Grade RWE</div>
+  </div>
+
+  <div class="connector" aria-hidden="true">
+    <svg width="920" height="56" viewBox="0 0 920 56" fill="none" style="max-width:100%;">
+      <path d="M460 4 C460 32 155 24 155 48" stroke="#8aa895" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <path d="M460 4 L460 48" stroke="#8aa895" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <path d="M460 4 C460 32 765 24 765 48" stroke="#8aa895" stroke-width="1.5" marker-end="url(#arrow)"/>
+    </svg>
+  </div>
+
+  <div class="row-bottom">
+    <a class="node" href="https://www.phdcenter.org.tw/database/" target="_blank" rel="noopener">
+      <div class="t">PHDc</div>
+      <div class="lines">
+        <div>Operations and Multinational Coordination</div>
+        <div>Methods Development and Programming</div>
+        <div>Quality Control and Integrated Reporting</div>
+      </div>
+      <span class="go">Visit site →</span>
+    </a>
+    <a class="node" href="https://www.aspensig.asia/" target="_blank" rel="noopener">
+      <div class="t">AsPEN</div>
+      <div class="lines">
+        <div>Country Investigators and Local Data Expertise</div>
+        <div>Country-Specific Adaptation</div>
+        <div>Local Regulatory Strategy</div>
+      </div>
+      <span class="go">Visit site →</span>
+    </a>
+    <a class="node" href="https://phd-center.github.io/impresive/" target="_blank" rel="noopener">
+      <div class="t">IMPRESIVE</div>
+      <div class="lines">
+        <div>Standardized Analytic Modules</div>
+        <div>Implementation Framework</div>
+        <div>Reusable Analytic Code</div>
+      </div>
+      <span class="go">Visit site →</span>
+    </a>
+  </div>
+
+  <footer>
+    © 2026 Population Health Data Center, National Cheng Kung University ·
+    <a href="https://www.phdcenter.org.tw/database/" target="_blank" rel="noopener">PHDc</a> ·
+    <a href="https://www.aspensig.asia/" target="_blank" rel="noopener">AsPEN</a> ·
+    <a href="https://phd-center.github.io/impresive/" target="_blank" rel="noopener">IMPRESIVE</a>
+  </footer>
+
+</div>
+</body>
+</html>
