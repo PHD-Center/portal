@@ -79,11 +79,19 @@
     box-shadow: 0 4px 14px rgba(47,93,64,.18);
     transform: translateY(-2px);
   }
-  a.node .icon {
-    width: 30px; height: 30px; color: var(--green);
-    display: block; margin: 2px auto 8px;
+  a.node img.figure {
+    width: 64px; height: 64px; border-radius: 50%; object-fit: cover;
+    display: block; margin: 2px auto 10px;
+    border: 2.5px solid var(--green-tint);
+    box-shadow: 0 2px 8px rgba(47,93,64,.15);
   }
-  a.node .lines { margin-top: 6px; }
+  .node .role {
+    display: inline-block;
+    font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
+    color: var(--green); background: var(--green-tint);
+    border-radius: 999px; padding: 2px 12px; margin-top: 4px;
+  }
+  a.node .lines { margin-top: 8px; }
   a.node .lines div { font-size: 13.5px; color: var(--ink); margin-top: 4px; }
   a.node .go {
     display: inline-block; margin-top: 12px;
@@ -100,6 +108,16 @@
     border-radius: 4px; padding: 1px 8px;
   }
 
+  .goal {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    max-width: 480px; margin: 0 auto;
+    background: var(--green-dark); color: #fff;
+    border-radius: 999px; padding: 13px 26px;
+    box-shadow: 0 4px 14px rgba(36,73,47,.28);
+    font-weight: 700; font-size: 15px; text-align: center;
+  }
+  .goal svg { width: 22px; height: 22px; flex: none; color: #bfd8c7; }
+
   footer {
     text-align: center; color: var(--muted); font-size: 12.5px;
     margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line);
@@ -112,6 +130,7 @@
     .connector { display: none; }
     .hub { margin: 20px auto; }
     .row-top { margin-bottom: 0; }
+    .goal { margin-top: 24px; }
   }
 </style>
 </head>
@@ -173,14 +192,9 @@
 
   <div class="row-bottom">
     <a class="node" href="https://www.phdcenter.org.tw/database/" target="_blank" rel="noopener">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
-        <circle cx="12" cy="12" r="2.7"/>
-        <circle cx="4.8" cy="4.8" r="2"/>
-        <circle cx="19.2" cy="4.8" r="2"/>
-        <circle cx="12" cy="20.2" r="2"/>
-        <path d="M10.1 10.1 6.2 6.2 M13.9 10.1 17.8 6.2 M12 14.7 12 18.2"/>
-      </svg>
+      <img class="figure" src="assets/fig-coordination.png" alt="Coordination robot figure">
       <div class="t">PHDc</div>
+      <div class="role">Coordination</div>
       <div class="lines">
         <div>Operations and Multinational Coordination</div>
         <div>Methods Development and Programming</div>
@@ -189,13 +203,9 @@
       <span class="go">Visit site →</span>
     </a>
     <a class="node" href="https://www.aspensig.asia/" target="_blank" rel="noopener">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
-        <circle cx="9" cy="8" r="3.1"/>
-        <path d="M3.4 19.5c.6-3.4 2.9-5.3 5.6-5.3s5 1.9 5.6 5.3"/>
-        <circle cx="17.2" cy="9" r="2.4"/>
-        <path d="M16.4 14.4c2.4.3 4 2 4.4 4.6"/>
-      </svg>
+      <img class="figure" src="assets/fig-platform.png" alt="Platform robot figure">
       <div class="t">AsPEN</div>
+      <div class="role">Platform</div>
       <div class="lines">
         <div>Country Investigators and Local Data Expertise</div>
         <div>Country-Specific Adaptation</div>
@@ -204,12 +214,9 @@
       <span class="go">Visit site →</span>
     </a>
     <a class="node" href="https://phd-center.github.io/impresive/" target="_blank" rel="noopener">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M8.5 7 4 12l4.5 5"/>
-        <path d="M15.5 7 20 12l-4.5 5"/>
-        <path d="M13.4 5.5 10.6 18.5"/>
-      </svg>
+      <img class="figure" src="assets/fig-infrastructure.png" alt="Infrastructure robot figure">
       <div class="t">IMPRESIVE</div>
+      <div class="role">Infrastructure</div>
       <div class="lines">
         <div>Standardized Analytic Modules</div>
         <div>Implementation Framework</div>
@@ -217,6 +224,23 @@
       </div>
       <span class="go">Visit site →</span>
     </a>
+  </div>
+
+  <div class="connector" aria-hidden="true">
+    <svg width="920" height="56" viewBox="0 0 920 56" fill="none" style="max-width:100%;">
+      <path d="M155 4 C155 36 460 18 460 32" stroke="#8aa895" stroke-width="1.5"/>
+      <path d="M765 4 C765 36 460 18 460 32" stroke="#8aa895" stroke-width="1.5"/>
+      <path d="M460 4 L460 48" stroke="#8aa895" stroke-width="1.5" marker-end="url(#arrow)"/>
+    </svg>
+  </div>
+
+  <div class="goal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+      <circle cx="12" cy="12" r="8.5"/>
+      <circle cx="12" cy="12" r="4.8"/>
+      <circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/>
+    </svg>
+    <span>High-Quality Evidence · Fit for Decision</span>
   </div>
 
   <footer>
