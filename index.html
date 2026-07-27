@@ -393,6 +393,9 @@
   }
   window.addEventListener('load', draw);
   window.addEventListener('resize', draw);
+  if (window.ResizeObserver) {
+    new ResizeObserver(draw).observe(document.querySelector('.diagram'));
+  }
   draw();
 })();
 </script>
