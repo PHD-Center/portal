@@ -111,6 +111,22 @@
   .connector { display: flex; justify-content: center; }
   .connector svg { display: block; }
 
+  .impact-head {
+    text-align: center; font-size: 12px; font-weight: 700;
+    letter-spacing: .16em; text-transform: uppercase;
+    color: var(--green-dark); margin-bottom: 14px;
+  }
+  .row-impact { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 24px; }
+  .impact {
+    background: #fbfdfc;
+    border: 1.5px dashed var(--line);
+    border-radius: 8px;
+    padding: 12px 16px;
+    text-align: center;
+  }
+  .impact .it { font-weight: 700; color: var(--green); font-size: 13.5px; }
+  .impact .id { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+
   .diagram { position: relative; }
   .loop-svg {
     position: absolute; top: 0; left: 0;
@@ -142,7 +158,8 @@
   footer a:hover { color: var(--green); }
 
   @media (max-width: 680px) {
-    .row-top, .row-bottom { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+    .row-top, .row-bottom, .row-impact { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+    .row-impact { margin-top: 20px; }
     .connector { display: none; }
     .hub { margin: 20px auto; }
     .row-top { margin-bottom: 0; }
@@ -295,6 +312,32 @@
     <span>High-Quality Evidence · Fit for Decision</span>
   </div>
 
+  <div class="connector" aria-hidden="true">
+    <svg width="920" height="56" viewBox="0 0 920 56" fill="none" style="max-width:100%;">
+      <path d="M460 4 V18 M148 18 H772 M148 18 V38 M460 18 V38 M772 18 V38" stroke="#6b9080" stroke-width="2" stroke-dasharray="6 5"/>
+      <path d="M148 47 l-5.5 -9.5 h11 Z" fill="#6b9080"/>
+      <path d="M460 47 l-5.5 -9.5 h11 Z" fill="#6b9080"/>
+      <path d="M772 47 l-5.5 -9.5 h11 Z" fill="#6b9080"/>
+    </svg>
+  </div>
+
+  <div class="impact-head">Impact</div>
+
+  <div class="row-impact">
+    <div class="impact">
+      <div class="it">Training &amp; Talent → PHDc</div>
+      <div class="id">Trained researchers flow back to strengthen coordination</div>
+    </div>
+    <div class="impact">
+      <div class="it">New Members → AsPEN</div>
+      <div class="id">Impact attracts more investigators and databases to the network</div>
+    </div>
+    <div class="impact">
+      <div class="it">Refinement → IMPRESIVE</div>
+      <div class="id">Lessons learned improve modules and infrastructure</div>
+    </div>
+  </div>
+
   <svg class="loop-svg" aria-hidden="true">
     <path class="loop-path" fill="none" stroke="#6b9080" stroke-width="2" stroke-dasharray="6 5"/>
     <path class="loop-arrow" fill="#6b9080"/>
@@ -320,7 +363,7 @@
   function draw() {
     var diagram = document.querySelector('.diagram');
     var hub = document.querySelector('.hub');
-    var goal = document.querySelector('.goal');
+    var goal = document.querySelector('.row-impact');
     if (!svg || !hub || !goal) return;
     var dr = diagram.getBoundingClientRect();
     var hr = hub.getBoundingClientRect();
