@@ -111,6 +111,20 @@
   .connector { display: flex; justify-content: center; }
   .connector svg { display: block; }
 
+  .diagram { position: relative; }
+  .loop-svg {
+    position: absolute; top: 0; left: 0;
+    pointer-events: none; overflow: visible; display: none;
+  }
+  .loop-note {
+    text-align: center; font-size: 12.5px; color: var(--muted);
+    margin-top: 16px;
+  }
+  @media (min-width: 1080px) {
+    .loop-svg { display: block; }
+    .loop-note { display: none; }
+  }
+
   .goal {
     display: flex; align-items: center; justify-content: center;
     max-width: 480px; margin: 0 auto;
@@ -150,6 +164,8 @@
     <div class="sub">for Decision-Grade RWE</div>
     <div class="rule"></div>
   </header>
+
+  <div class="diagram">
 
   <div class="row-top">
     <div class="node">
@@ -230,6 +246,7 @@
         <div>Operations and Multinational Coordination</div>
         <div>Methods Development and Programming</div>
         <div>Quality Control and Integrated Reporting</div>
+        <div>Talent Development</div>
       </div>
       <span class="go">Visit site →</span>
     </a>
@@ -278,6 +295,16 @@
     <span>High-Quality Evidence · Fit for Decision</span>
   </div>
 
+  <svg class="loop-svg" aria-hidden="true">
+    <path class="loop-path" fill="none" stroke="#6b9080" stroke-width="2" stroke-dasharray="6 5"/>
+    <path class="loop-arrow" fill="#6b9080"/>
+    <text class="loop-label" font-size="12" fill="#5f6b66"></text>
+  </svg>
+
+  </div>
+
+  <div class="loop-note">↻ Evidence feeds back into the ecosystem</div>
+
   <footer>
     © 2026 Population Health Data Center, National Cheng Kung University ·
     <a href="https://www.phdcenter.org.tw/database/" target="_blank" rel="noopener">PHDc</a> ·
@@ -286,5 +313,45 @@
   </footer>
 
 </div>
+
+<script>
+(function () {
+  var svg = document.querySelector('.loop-svg');
+  function draw() {
+    var diagram = document.querySelector('.diagram');
+    var hub = document.querySelector('.hub');
+    var goal = document.querySelector('.goal');
+    if (!svg || !hub || !goal) return;
+    var dr = diagram.getBoundingClientRect();
+    var hr = hub.getBoundingClientRect();
+    var gr = goal.getBoundingClientRect();
+    var w = dr.width, h = dr.height, laneW = 56;
+    var lane = w + 36;
+    var x0 = gr.right - dr.left, y0 = gr.top - dr.top + gr.height / 2;
+    var x1 = hr.right - dr.left, y1 = hr.top - dr.top + hr.height / 2;
+    svg.setAttribute('width', w + laneW);
+    svg.setAttribute('height', h);
+    svg.setAttribute('viewBox', '0 0 ' + (w + laneW) + ' ' + h);
+    svg.querySelector('.loop-path').setAttribute('d',
+      'M' + x0 + ' ' + y0 + ' H' + (lane - 14) +
+      ' Q' + lane + ' ' + y0 + ' ' + lane + ' ' + (y0 - 14) +
+      ' V' + (y1 + 14) +
+      ' Q' + lane + ' ' + y1 + ' ' + (lane - 14) + ' ' + y1 +
+      ' H' + (x1 + 11));
+    svg.querySelector('.loop-arrow').setAttribute('d',
+      'M' + (x1 + 2) + ' ' + y1 + ' l10 -6 v12 Z');
+    var label = svg.querySelector('.loop-label');
+    var midY = (y0 + y1) / 2;
+    label.textContent = 'Ecosystem · Evidence feeds back';
+    label.setAttribute('text-anchor', 'middle');
+    label.setAttribute('x', lane + 16);
+    label.setAttribute('y', midY);
+    label.setAttribute('transform', 'rotate(90 ' + (lane + 16) + ' ' + midY + ')');
+  }
+  window.addEventListener('load', draw);
+  window.addEventListener('resize', draw);
+  draw();
+})();
+</script>
 </body>
 </html>
