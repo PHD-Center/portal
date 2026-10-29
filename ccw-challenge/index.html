@@ -19,6 +19,23 @@
 .feedback{margin-top:17px;padding:12px 14px;border-radius:12px;font-size:13px;line-height:1.45;display:none}.feedback.show{display:block}.feedback.ok{background:#eaf7ee;color:#256344}.feedback.no{background:#fff1ec;color:#934a31}.feedback b{display:block;margin-bottom:3px}
 .actions{display:flex;gap:9px;justify-content:space-between;padding:15px 24px 23px;border-top:1px solid #edf2ee}.btn{border:1px solid #cfe0d7;border-radius:11px;padding:10px 17px;background:#fff;color:var(--ink);font-size:13px;font-weight:800}.btn.primary{background:#176b50;color:#fff;border-color:#176b50}.btn.primary:disabled{opacity:.4;cursor:not-allowed}.btn:hover:not(:disabled){filter:brightness(.96)}.footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px;color:#798d86;font-size:11px}.endScreen{display:none;padding:26px 24px 30px;text-align:center}.endScreen h2{font-size:27px;letter-spacing:-.03em;margin:11px}.endScreen .large{font-size:58px;line-height:1.2;font-weight:850;letter-spacing:-.06em;color:var(--green)}.endScreen p{color:var(--muted);font-size:14px}.review{margin:13px 24px 24px;border-top:1px solid var(--line);padding-top:15px}.review summary{color:#3b7563;font-weight:750;cursor:pointer;font-size:12px}.table-scroll{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}.referenceTime{font-variant-numeric:tabular-nums;white-space:nowrap}.referenceTime sub{font-size:76%;vertical-align:sub}.review table{min-width:490px;width:100%;border-collapse:collapse;margin-top:12px;font-size:12px}.review th,.review td{padding:7px 5px;border-bottom:1px solid #e9efea;text-align:left}.review th{color:#72857d;font-size:11px}.pills{display:flex;gap:5px;flex-wrap:wrap}.pill{border-radius:20px;padding:3px 8px;background:#e8f3ec;color:#317a54;font-size:11px}
 @media(max-width:960px){.columns{grid-template-columns:1fr}.heroStats{display:none}.qprompt{min-height:0}.figurewrap svg{max-height:590px}}@media(max-width:550px){.wrap{padding:0 12px}.hero{padding-top:26px}.head{padding:17px}.qbody{padding:20px 16px}.quizhead{padding:20px 16px 14px}.progress{margin:0 16px}.actions{padding:13px 16px 19px}.hero h1{font-size:31px}.legend{gap:9px;padding:13px 15px}.figurewrap{padding:9px 5px}.casebar{margin:0 11px 13px}.topline{min-height:72px}.footer{display:block}}
+
+/* Hidden instructor answer key; revealed only by the /phdc keyboard sequence. */
+#answerVault[hidden]{display:none!important}
+#answerVault{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(10,38,32,.67);backdrop-filter:blur(5px)}
+.vaultPanel{background:#fff;color:var(--ink);border-radius:20px;border:1px solid #d7e9e0;width:min(760px,100%);max-height:min(88vh,850px);display:flex;flex-direction:column;box-shadow:0 30px 90px #041e1b40;overflow:hidden}
+.vaultHeader{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px 16px;border-bottom:1px solid var(--line)}
+.vaultHeader h2{margin:2px 0 0;font-size:23px;letter-spacing:-.025em}
+.vaultCount{font-size:12px;color:var(--muted);margin:3px 0 0}
+.vaultClose{border:1px solid var(--line);border-radius:10px;width:36px;height:36px;background:#fff;color:#31554b;font-size:22px;flex:none}
+.vaultBody{overflow-y:auto;padding:8px 24px 20px;overscroll-behavior:contain}
+.vaultEntry{padding:17px 0;border-bottom:1px solid #edf2ef}
+.vaultEntry:last-child{border-bottom:0}
+.vaultIndex{color:#648278;font-size:11px;font-weight:800;letter-spacing:.1em}
+.vaultQuestion{margin:5px 0 7px;font-size:15px;font-weight:730;line-height:1.4}
+.vaultCorrect{margin:0;color:#216a49;font-size:14px;line-height:1.45}
+.vaultCorrect b{font-weight:850}
+@media(max-width:550px){#answerVault{padding:9px}.vaultPanel{max-height:95vh}.vaultHeader{padding:16px}.vaultBody{padding:5px 16px 14px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
@@ -28,8 +45,18 @@
 <section class="hero"><div><div class="eyebrow">Target trial emulation · Practice</div><h1>Clone · Censor · Weight</h1><p class="lead">Follow patients A–M. Pick the correct answer at each step.</p><div class="chipline"><span class="chip">Grace period · 182 days</span><span class="chip">Follow-up · 365 days</span></div></div><div class="heroStats"><strong id="scoreTop">0 / 17</strong><span>First-try answers</span></div></section>
 <div class="columns">
 <section class="panel" aria-label="Patient timelines"><div class="head"><h2>Patients’ lifelines · A–M</h2><p>Green triangle = consultation; gold cross = death; blue bracket = loss to follow-up. Select a patient to inspect.</p></div><div class="figurewrap"><svg id="timeline" viewBox="0 0 704 586" role="img" aria-label="Schematic lifelines for patients A through M from day zero to day 365"></svg></div><div class="legend"><span><i class="key tri"></i> Consultation</span><span><i class="key x">✕</i> Death</span><span><i class="key loss">]</i> Lost</span><span><i class="linekey"></i> Day 182</span><span><i class="linekey end"></i> Day 365</span></div><div class="casebar" id="casebar" aria-live="polite">Patient A · Consultation within grace; death later.</div><p class="sidenote">Schematic based on the A–M teaching figure (*Cancers* 2021, 13, 992). Event placement is illustrative; day 182 and day 365 are the defined cutoffs.</p></section>
-<section class="panel" aria-label="CCW quiz"><div id="quizArea"><div class="quizhead"><div class="stepLabel" id="phase">Cloning</div><div class="qcounter" id="counter">1 / 17</div></div><div class="progress" aria-hidden="true"><div class="progressfill" id="fill"></div></div><div class="qbody"><div class="qtype"><span id="caseHint">Time zero</span><span id="caseTag" class="pill">CLONE</span></div><div class="qprompt" id="prompt">Loading…</div><div class="answers" id="answers"></div><div class="feedback" id="feedback" aria-live="polite"></div></div><div class="actions"><button class="btn" id="reset">Restart</button><button class="btn primary" id="next" disabled>Next question →</button></div></div><div class="endScreen" id="done"><div class="eyebrow">Challenge complete</div><h2>You've followed the full CCW workflow.</h2><div class="large" id="finalScore">21 / 17</div><p>Questions answered correctly on the first try.</p><button class="btn primary" id="again">Play again ↻</button></div><details class="review" id="review"><summary>View A–M reference (after the challenge)</summary><div id="reference"></div></details></section>
+<section class="panel" aria-label="CCW quiz"><div id="quizArea"><div class="quizhead"><div class="stepLabel" id="phase">Cloning</div><div class="qcounter" id="counter">1 / 17</div></div><div class="progress" aria-hidden="true"><div class="progressfill" id="fill"></div></div><div class="qbody"><div class="qtype"><span id="caseHint">Time zero</span><span id="caseTag" class="pill">CLONE</span></div><div class="qprompt" id="prompt">Loading…</div><div class="answers" id="answers"></div><div class="feedback" id="feedback" aria-live="polite"></div></div><div class="actions"><button class="btn" id="reset">Restart</button><button class="btn primary" id="next" disabled>Next question →</button></div></div><div class="endScreen" id="done"><div class="eyebrow">Challenge complete</div><h2>You've followed the full CCW workflow.</h2><div class="large" id="finalScore">17 / 17</div><p>Questions answered correctly on the first try.</p><button class="btn primary" id="again">Play again ↻</button></div><details class="review" id="review"><summary>View A–M reference (after the challenge)</summary><div id="reference"></div></details></section>
 </div></main>
+
+<div id="answerVault" role="dialog" aria-modal="true" aria-labelledby="vaultTitle" hidden tabindex="-1">
+  <div class="vaultPanel">
+    <div class="vaultHeader">
+      <div><div class="eyebrow">Instructor view</div><h2 id="vaultTitle">Questions &amp; answers</h2><p class="vaultCount" id="vaultCount"></p></div>
+      <button type="button" class="vaultClose" id="vaultClose" aria-label="Close answer key">×</button>
+    </div>
+    <div class="vaultBody" id="vaultBody"></div>
+  </div>
+</div>
 <script>
 (function(){
 "use strict";
@@ -64,7 +91,7 @@ var Q=[
 {phase:"Weight",tag:"A · TREATED",case:"A",hint:"Two follow-up clocks",q:"For A's TREATED clone, when does the weight-model risk period end?",a:["At consultation","At the later death","At day 365","At the next scheduled visit"],ok:0,why:"Treatment initiation within grace is established at consultation, even though outcome follow-up continues."},
 {phase:"Weight",tag:"INTERVAL",case:"A",hint:"Day-60 artificial censoring",q:"With 30-day intervals, when does A's CONTROL clone get censor_long=1?",a:["Day 0–30","Day 31–60","Day 61–90","Every interval"],ok:1,why:"The interval containing artificial censoring is flagged as 1."},
 {phase:"Analyze",tag:"OUTCOME MODEL",case:null,hint:"After weighting",q:"After stabilized IPCW has been calculated, what comes next?",a:["Only summarize the censored clones","Apply weights in the outcome model","Remove every control clone","End everyone’s outcome follow-up at day 182"],ok:1,why:"The outcome analysis uses the inverse probability weights to address selection from artificial censoring."},
-{phase:"Analyze",tag:"ESTIMAND",case:null,hint:"What are we comparing?",q:"What is the treatment-strategy comparison in this A–M example?",a:["Consultation recipients vs non-recipients, classified using future treatment","Initiate consultation within 182 days vs no initiation within the first 182 days","Only survivors at day 182 vs non-survivors","Any consultation vs never consultation during an unlimited period"],ok:1,why:"The grace period is part of the intervention definition, and follow-up begins at the common time zero."},
+{phase:"Weight",tag:"WHY IPCW?",case:null,hint:"Selection after artificial censoring",q:"Why do we need IPCW after artificial censoring?",a:["To make both treatment strategies have exactly the same number of patients","To account for selection bias because clones who remain uncensored may differ from those artificially censored","To remove all deaths occurring during the grace period","To replace the need to define treatment strategies"],ok:1,why:"Artificial censoring may be informative. IPCW reweights uncensored clones to account for the induced selection, under the required assumptions."},
 {phase:"Analyze",tag:"BOOTSTRAP",case:null,hint:"Uncertainty estimation",q:"What should a full patient-level CCW bootstrap repeat within each resample?",a:["Only the final weighted regression with previously fixed IPCW","The entire cloning, censoring, weighting, and outcome analysis","Only the baseline descriptive table","Only the original A–M diagram"],ok:1,why:"Refitting weights and outcomes in each replicate propagates uncertainty from the full estimated procedure."}
 ];
 var row=0,score=0,tries=0,solved=false,selected="A";
@@ -124,6 +151,53 @@ document.getElementById("reset").addEventListener("click",reset);
 document.getElementById("again").addEventListener("click",reset);
 document.addEventListener("keydown",function(e){if(e.target.tagName==="BUTTON"||e.target.tagName==="SUMMARY")return;if(e.key>="1"&&e.key<="4"&&!solved){var i=Number(e.key)-1;if(i<Q[row].a.length)answer(i);}else if(e.key==="Enter"&&solved){els.next.click();}});
 els.review.addEventListener("toggle",function(){if(els.quizArea.style.display!=="none"&&els.review.open){els.review.open=false;}});
+
+/* Hidden instructor shortcut: type /phdc to reveal the complete answer key. */
+var answerVault=document.getElementById("answerVault");
+var vaultBody=document.getElementById("vaultBody");
+var vaultClose=document.getElementById("vaultClose");
+var vaultSequence="";
+var vaultPreviousFocus=null;
+function showVault(){
+ vaultPreviousFocus=document.activeElement;
+ vaultBody.replaceChildren();
+ Q.forEach(function(q,i){
+  var entry=document.createElement("section");entry.className="vaultEntry";
+  var index=document.createElement("div");index.className="vaultIndex";index.textContent="QUESTION "+(i+1)+" · "+q.phase.toUpperCase();
+  var question=document.createElement("p");question.className="vaultQuestion";question.textContent=q.q;
+  var correct=document.createElement("p");correct.className="vaultCorrect";
+  var marker=document.createElement("b");marker.textContent="Answer: ";
+  correct.appendChild(marker);
+  correct.appendChild(document.createTextNode(q.a[q.ok]));
+  entry.append(index,question,correct);vaultBody.appendChild(entry);
+ });
+ document.getElementById("vaultCount").textContent=Q.length+" questions · correct answers";
+ answerVault.hidden=false;
+ document.body.style.overflow="hidden";
+ vaultClose.focus();
+}
+function hideVault(){
+ answerVault.hidden=true;
+ document.body.style.overflow="";
+ vaultSequence="";
+ if(vaultPreviousFocus&&typeof vaultPreviousFocus.focus==="function")vaultPreviousFocus.focus();
+}
+vaultClose.addEventListener("click",hideVault);
+answerVault.addEventListener("click",function(e){if(e.target===answerVault)hideVault();});
+document.addEventListener("keydown",function(e){
+ if(!answerVault.hidden){
+  if(e.key==="Escape"){e.preventDefault();hideVault();}
+  if(e.key==="Tab"){
+   e.preventDefault();vaultClose.focus();
+  }
+  return;
+ }
+ if(e.ctrlKey||e.altKey||e.metaKey||e.isComposing)return;
+ if(e.key.length===1){
+  vaultSequence=(vaultSequence+e.key.toLowerCase()).slice(-5);
+  if(vaultSequence==="/phdc"){e.preventDefault();vaultSequence="";showVault();}
+ }
+});
 buildReference();reset();
 })();
 </script>
